@@ -3,5 +3,5 @@ var SCRIPT_DIR = $(cd "$_this_dir" { pwd })
 
 cd $SCRIPT_DIR {
   var tag = $(cat ../tag.txt)
-  docker build --tag="demurgos/rust-cross-builder:${tag}" .
+  docker run -it "demurgos/rust-cross-host:${tag}"
 }
