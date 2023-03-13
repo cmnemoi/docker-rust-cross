@@ -3,8 +3,12 @@
 This is my custom image for Rust cross compilation.
 
 ```
-./cross-builder/publish.sh
+# pacman -S docker-buildx
+git submodule update --init --recursive
+./generate.sh
+./host/publish.sh
 ```
 
 Images:
-- `rust-cross-builder`: Builder image
+- `rust-cross-host`: Host image
+- `rust-cross-guest-x86_64-pc-windows-gnu`: Guest image for `x86_64-pc-windows-gnu`
