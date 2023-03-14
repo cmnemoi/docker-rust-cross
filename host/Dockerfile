@@ -19,6 +19,9 @@ RUN apk add --no-cache curl docker \
 
 ENV PATH=/opt/cross:$PATH
 
-RUN rustup target add x86_64-unknown-linux-gnu x86_64-pc-windows-gnu
+RUN rustup target add \
+  x86_64-apple-darwin \
+  x86_64-pc-windows-gnu \
+  x86_64-unknown-linux-gnu
 
 CMD ["/bin/sh"]
