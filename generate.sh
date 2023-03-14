@@ -21,13 +21,13 @@ for target in (targets) {
   var image = target->image
   echo "generating $name"
   cd $SCRIPT_DIR {
-#    cd cross {
-#      if (name === "x86_64-apple-darwin") {
-#        cargo build-docker-image "${image}" --tag local --engine docker --build-arg "MACOS_SDK_URL=https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.13.sdk.tar.xz"
-#      } else {
-#        cargo build-docker-image "${image}" --tag local --engine docker
-#      }
-#    }
+    cd cross {
+      if (name === "x86_64-apple-darwin") {
+        cargo build-docker-image "${image}" --tag local --engine docker --build-arg "MACOS_SDK_URL=https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.13.sdk.tar.xz"
+      } else {
+        cargo build-docker-image "${image}" --tag local --engine docker
+      }
+    }
     mkdir -p "guest-${name}"
     cd "guest-${name}" {
       cat >build.sh <<< """
@@ -50,7 +50,7 @@ for target in (targets) {
       }
       """
       cat >Dockerfile <<< """
-      FROM ${image}:local
+      FROM ghcr.io/cross-rs/${image}:local
       MAINTAINER Charles Samborski <demurgos@demurgos.net>
       CMD ["/bin/sh"]
       """
