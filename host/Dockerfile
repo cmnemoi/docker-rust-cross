@@ -1,28 +1,29 @@
-FROM archlinux:latest
+FROM rust:1.68.0-alpine3.17
 MAINTAINER Charles Samborski <demurgos@demurgos.net>
 
-RUN pacman -Syu --quiet --noconfirm --noprogressbar \
-  && pacman -S --quiet --noconfirm --noprogressbar \
-    docker \
-  && pacman -Scc --quiet --noconfirm
+RUN apk add --no-cache build-base docker
 
-RUN curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs > ./rustup-init.sh \
-  && chmod +x ./rustup-init.sh \
-  && ./rustup-init.sh -y --profile minimal --default-toolchain stable --component rust-std \
-  && rm ./rustup-init.sh
+RUN apk add --no-cache curl \
+  && mkdir -p /opt/sccache \
+  && curl -L https://github.com/mozilla/sccache/releases/download/v0.3.3/sccache-v0.3.3-x86_64-unknown-linux-musl.tar.gz \
+    | tar -xz --to-stdout "sccache-v0.3.3-x86_64-unknown-linux-musl/sccache" > /opt/sccache/sccache \
+  && chmod +x /opt/sccache/sccache \
+  && apk del --purge curl \
 
-ENV PATH=/root/.cargo/bin:$PATH
+ENV PATH=/opt/sccache:$PATH
 
-RUN rustup target add \
-    x86_64-apple-darwin \
-    x86_64-pc-windows-gnu \
-    x86_64-unknown-linux-gnu
-
-RUN mkdir -p /opt/cross \
-  && curl -L https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-gnu.tar.gz \
+RUN apk add --no-cache curl \
+  && mkdir -p /opt/cross \
+  && curl -L https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-musl.tar.gz \
     | tar -xz --to-stdout "cross" > /opt/cross/cross \
-  && chmod +x /opt/cross/cross
+  && chmod +x /opt/cross/cross \
+  && apk del --purge curl
 
 ENV PATH=/opt/cross:$PATH
+
+#RUN rustup target add \
+#  x86_64-apple-darwin \
+#  x86_64-pc-windows-gnu \
+#  x86_64-unknown-linux-gnu
 
 CMD ["/bin/sh"]
