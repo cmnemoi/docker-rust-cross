@@ -23,7 +23,7 @@ for target in (targets) {
   cd $SCRIPT_DIR {
     cd cross {
       if (name === "x86_64-apple-darwin") {
-        cargo build-docker-image "${image}" --tag local --engine docker --build-arg "MACOS_SDK_URL=https://github.com/joseluisq/macosx-sdks/releases/download/10.15/MacOSX10.15.sdk.tar.xz"
+        cargo build-docker-image "${image}" --tag local --engine docker --build-arg "MACOS_SDK_URL=https://github.com/joseluisq/macosx-sdks/releases/download/11.1/MacOSX11.1.sdk.tar.xz"
       } else {
         cargo build-docker-image "${image}" --tag local --engine docker
       }
