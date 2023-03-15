@@ -18,4 +18,11 @@ RUN rustup target add \
     x86_64-pc-windows-gnu \
     x86_64-unknown-linux-gnu
 
+RUN mkdir -p /opt/cross \
+  && curl -L https://github.com/cross-rs/cross/releases/download/v0.2.5/cross-x86_64-unknown-linux-gnu.tar.gz \
+    | tar -xz --to-stdout "cross" > /opt/cross/cross \
+  && chmod +x /opt/cross/cross
+
+ENV PATH=/opt/cross:$PATH
+
 CMD ["/bin/sh"]
