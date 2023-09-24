@@ -1,4 +1,4 @@
-#!/usr/bin/env oil
+#!/usr/bin/env ysh
 # Oil help: <https://www.oilshell.org/release/latest/doc/oil-language-tour.html>
 
 var SCRIPT_DIR = $(cd "$_this_dir" { pwd })
@@ -43,7 +43,7 @@ for target in (targets) {
     mkdir -p "guest-${name}"
     cd "guest-${name}" {
       cat >build.sh <<< """
-      #!/usr/bin/env oil
+      #!/usr/bin/env ysh
       var SCRIPT_DIR = \$(cd "\$_this_dir" { pwd })
 
       cd \$SCRIPT_DIR {
@@ -52,7 +52,7 @@ for target in (targets) {
       }
       """
       cat >publish.sh <<< """
-      #!/usr/bin/env oil
+      #!/usr/bin/env ysh
       var SCRIPT_DIR = \$(cd "\$_this_dir" { pwd })
 
       cd \$SCRIPT_DIR {

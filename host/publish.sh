@@ -1,4 +1,4 @@
-#!/usr/bin/env oil
+#!/usr/bin/env ysh
 var SCRIPT_DIR = $(cd "$_this_dir" { pwd })
 
 cd $SCRIPT_DIR {
