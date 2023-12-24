@@ -1,5 +1,5 @@
 #!/usr/bin/env ysh
-# Oil help: <https://www.oilshell.org/release/latest/doc/oil-language-tour.html>
+# Ysh help: <https://www.oilshell.org/release/latest/doc/ysh-tour.html>
 
 var SCRIPT_DIR = $(cd "$_this_dir" { pwd })
 
@@ -19,8 +19,8 @@ const targets = [
 ]
 
 for target in (targets) {
-  var name = target->name
-  var image = target->image
+  var name = target["name"]
+  var image = target["image"]
   echo "generating $name"
   cd $SCRIPT_DIR {
     cd cross {

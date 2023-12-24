@@ -3,7 +3,7 @@
 This is my custom image for Rust cross compilation.
 
 ```
-# pacman -S docker-buildx
+# pacman -S docker-buildx docker
 git submodule update --init --recursive
 ./generate.sh
 ./host/publish.sh
