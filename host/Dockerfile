@@ -1,5 +1,5 @@
 # Remember to update the tag when updating
-FROM rust:1.74.1-alpine3.18
+FROM rust:1.75.0-alpine3.19
 MAINTAINER Charles Samborski <demurgos@demurgos.net>
 
 RUN apk add --no-cache build-base curl docker

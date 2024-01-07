@@ -5,17 +5,21 @@ var SCRIPT_DIR = $(cd "$_this_dir" { pwd })
 
 const targets = [
   {
-    name: "x86_64-unknown-linux-gnu",
-    image: "x86_64-unknown-linux-gnu"
+    name: "x86_64-apple-darwin",
+    image: "x86_64-apple-darwin-cross"
   },
   {
     name: "x86_64-pc-windows-gnu",
     image: "x86_64-pc-windows-gnu"
   },
   {
-    name: "x86_64-apple-darwin",
-    image: "x86_64-apple-darwin-cross"
-  }
+    name: "x86_64-unknown-linux-gnu",
+    image: "x86_64-unknown-linux-gnu"
+  },
+  {
+    name: "x86_64-unknown-linux-musl",
+    image: "x86_64-unknown-linux-musl"
+  },
 ]
 
 for target in (targets) {
