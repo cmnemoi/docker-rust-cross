@@ -65,9 +65,15 @@ for target in (targets) {
         docker push "demurgos/rust-cross-guest-${name}:\${tag}"
       }
       """
+      # https://stackoverflow.com/questions/61388002/how-to-avoid-question-during-the-docker-build
       cat >Dockerfile <<< """
       FROM ghcr.io/cross-rs/${image}:local
       MAINTAINER Charles Samborski <demurgos@demurgos.net>
+      ARG DEBIAN_FRONTEND=noninteractive
+      RUN apt-get update && apt-get install --assume-yes --quiet \\
+        yarnpkg \\
+        && rm -rf /var/lib/apt/lists/*
+        && ln -s ./yarnpkg /usr/bin/yarn
       ${workaround}
       CMD ["/bin/sh"]
       """
