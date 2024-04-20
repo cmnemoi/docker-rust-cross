@@ -72,7 +72,7 @@ for target in (targets) {
       ARG DEBIAN_FRONTEND=noninteractive
       RUN apt-get update && apt-get install --assume-yes --quiet \\
         yarnpkg \\
-        && rm -rf /var/lib/apt/lists/*
+        && rm -rf /var/lib/apt/lists/* \\
         && ln -s ./yarnpkg /usr/bin/yarn
       ${workaround}
       CMD ["/bin/sh"]
