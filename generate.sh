@@ -68,7 +68,7 @@ for target in (targets) {
       # https://stackoverflow.com/questions/61388002/how-to-avoid-question-during-the-docker-build
       cat >Dockerfile <<< """
       FROM ghcr.io/cross-rs/${image}:local
-      MAINTAINER Charles Samborski <demurgos@demurgos.net>
+      LABEL org.opencontainers.image.authors="Charles Samborski <demurgos@demurgos.net>"
       ARG DEBIAN_FRONTEND=noninteractive
       RUN apt-get update && apt-get install --assume-yes --quiet \\
         yarnpkg \\
